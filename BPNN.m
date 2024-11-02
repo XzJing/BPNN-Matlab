@@ -44,7 +44,6 @@ for hiddennum=fix(sqrt(inputnum+outputnum))+1:fix(sqrt(inputnum+outputnum))+10
     net.trainParam.epochs=1000;       % 设置训练次数
     net.trainParam.lr=0.001;           % 设置学习速率
     net.trainParam.goal=1e-6;     % 设置训练目标最小误差
-    net.trainParam.max_fail=60;      % 最小确认失败次数 
     
     % 进行网络训练
     net=train(net,inputn,outputn);
@@ -66,7 +65,7 @@ net=newff(inputn,outputn,hiddennum_best,transform_func,train_func);
 net.trainParam.epochs=1000;         % 训练次数
 net.trainParam.lr=0.001;             % 学习速率
 net.trainParam.goal=1e-6;       % 训练目标最小误差
-net.trainParam.max_fail=60;
+
 %% 7.网络训练
 net=train(net,inputn,outputn);      % train函数用于训练神经网络，调用蓝色仿真界面
 %% 8.网络测试
