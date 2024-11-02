@@ -1,130 +1,130 @@
 
-%% 1.³õÊ¼»¯
+%% 1.åˆå§‹åŒ–
 clear
 close all
 clc
-format short %¾«È·µ½Ğ¡Êıµãºó4Î»£¬format longÊÇ¾«È·µ½Ğ¡Êıµãºó15Î»
-%% 2.¶ÁÈ¡Êı¾İ
-% ´òÂÒÊı¾İ¼¯Ë³Ğò
-data = data(randperm(size(data, 1)), :);
+format short %ç²¾ç¡®åˆ°å°æ•°ç‚¹å4ä½ï¼Œformat longæ˜¯ç²¾ç¡®åˆ°å°æ•°ç‚¹å15ä½
+%% 2.è¯»å–æ•°æ®
+% æ‰“ä¹±æ•°æ®é›†é¡ºåº
+data = data(randperm(size(data, 1)), :); #è¯·ç”¨matlabçš„å¯¼å…¥æ•°æ®åŠŸèƒ½å¯¼å…¥æ•°æ®
 
-% ÉèÖÃÉñ¾­ÍøÂçµÄÊäÈëºÍÊä³ö
-input=data(:,1:end-1);    %µÚ1ÁĞÖÁµ¹ÊıµÚ2ÁĞÎªÊäÈë
-output=data(:,end);       %×îºó1ÁĞÎªÊä³ö
+% è®¾ç½®ç¥ç»ç½‘ç»œçš„è¾“å…¥å’Œè¾“å‡º
+input=data(:,1:end-1);    %ç¬¬1åˆ—è‡³å€’æ•°ç¬¬2åˆ—ä¸ºè¾“å…¥
+output=data(:,end);       %æœ€å1åˆ—ä¸ºè¾“å‡º
 
-N=length(output);       %¼ÆËãÑù±¾ÊıÁ¿
-testNum= length(output) *0.25 ;           %Éè¶¨²âÊÔ¼¯Ñù±¾ÊıÁ¿£¬´ÓÊı¾İ¼¯ºóÃæÑ¡È¡  
-trainNum=N-testNum;     %Éè¶¨ÑµÁ·¼¯Ñù±¾ÊıÁ¿
-%% 3.ÉèÖÃÑµÁ·¼¯ºÍ²âÊÔ¼¯
-input_train = input(1:trainNum,:)';                   % ÑµÁ·¼¯ÊäÈë
-output_train =output(1:trainNum)';                    % ÑµÁ·¼¯Êä³ö
-input_test =input(trainNum+1:trainNum+testNum,:)';    % ²âÊÔ¼¯ÊäÈë
-output_test =output(trainNum+1:trainNum+testNum)';    % ²âÊÔ¼¯Êä³ö
-%% 4.Êı¾İ¹éÒ»»¯
-[inputn,inputps]=mapminmax(input_train,0,1);         % ÑµÁ·¼¯ÊäÈë¹éÒ»»¯µ½[0,1]Ö®¼ä£¬¼õÉÙ²»Í¬Á¿¼¶´øÀ´µÄ²îÒì
-[outputn,outputps]=mapminmax(output_train);          % ÑµÁ·¼¯Êä³ö¹éÒ»»¯µ½Ä¬ÈÏÇø¼ä[-1, 1]£¬¼¤»îº¯ÊıµÄÈ¡Öµ·¶Î§
-inputn_test=mapminmax('apply',input_test,inputps);   % ²âÊÔ¼¯ÊäÈë²ÉÓÃºÍÑµÁ·¼¯ÊäÈëÏàÍ¬µÄ¹éÒ»»¯·½Ê½
-%% 5.Çó½â×î¼ÑÒşº¬²ã
-inputnum=size(input,2);   %sizeÓÃÀ´ÇóÈ¡¾ØÕóµÄĞĞÊıºÍÁĞÊı£¬1´ú±íĞĞÊı£¬2´ú±íÁĞÊı
+N=length(output);       %è®¡ç®—æ ·æœ¬æ•°é‡
+testNum= length(output) *0.3 ;           %è®¾å®šæµ‹è¯•é›†æ ·æœ¬æ•°é‡ï¼Œä»æ•°æ®é›†åé¢é€‰å–  
+trainNum=N-testNum;     %è®¾å®šè®­ç»ƒé›†æ ·æœ¬æ•°é‡
+%% 3.è®¾ç½®è®­ç»ƒé›†å’Œæµ‹è¯•é›†
+input_train = input(1:trainNum,:)';                   % è®­ç»ƒé›†è¾“å…¥
+output_train =output(1:trainNum)';                    % è®­ç»ƒé›†è¾“å‡º
+input_test =input(trainNum+1:trainNum+testNum,:)';    % æµ‹è¯•é›†è¾“å…¥
+output_test =output(trainNum+1:trainNum+testNum)';    % æµ‹è¯•é›†è¾“å‡º
+%% 4.æ•°æ®å½’ä¸€åŒ–
+[inputn,inputps]=mapminmax(input_train,0,1);         % è®­ç»ƒé›†è¾“å…¥å½’ä¸€åŒ–åˆ°[0,1]ä¹‹é—´ï¼Œå‡å°‘ä¸åŒé‡çº§å¸¦æ¥çš„å·®å¼‚
+[outputn,outputps]=mapminmax(output_train);          % è®­ç»ƒé›†è¾“å‡ºå½’ä¸€åŒ–åˆ°é»˜è®¤åŒºé—´[-1, 1]ï¼Œæ¿€æ´»å‡½æ•°çš„å–å€¼èŒƒå›´
+inputn_test=mapminmax('apply',input_test,inputps);   % æµ‹è¯•é›†è¾“å…¥é‡‡ç”¨å’Œè®­ç»ƒé›†è¾“å…¥ç›¸åŒçš„å½’ä¸€åŒ–æ–¹å¼
+%% 5.æ±‚è§£æœ€ä½³éšå«å±‚
+inputnum=size(input,2);   %sizeç”¨æ¥æ±‚å–çŸ©é˜µçš„è¡Œæ•°å’Œåˆ—æ•°ï¼Œ1ä»£è¡¨è¡Œæ•°ï¼Œ2ä»£è¡¨åˆ—æ•°
 outputnum=size(output,2); 
-disp(['ÊäÈë²ã½ÚµãÊı£º',num2str(inputnum),',  Êä³ö²ã½ÚµãÊı£º',num2str(outputnum)]) %num2strÓÃÀ´½øĞĞ×ª»»Îª×Ö·û´®ÀàĞÍ
-disp(['Òşº¬²ã½ÚµãÊı·¶Î§Îª ',num2str(fix(sqrt(inputnum+outputnum))+1),' ÖÁ ',num2str(fix(sqrt(inputnum+outputnum))+10)])
+disp(['è¾“å…¥å±‚èŠ‚ç‚¹æ•°ï¼š',num2str(inputnum),',  è¾“å‡ºå±‚èŠ‚ç‚¹æ•°ï¼š',num2str(outputnum)]) %num2strç”¨æ¥è¿›è¡Œè½¬æ¢ä¸ºå­—ç¬¦ä¸²ç±»å‹
+disp(['éšå«å±‚èŠ‚ç‚¹æ•°èŒƒå›´ä¸º ',num2str(fix(sqrt(inputnum+outputnum))+1),' è‡³ ',num2str(fix(sqrt(inputnum+outputnum))+10)])
 disp(' ')
-disp('×î¼ÑÒşº¬²ã½ÚµãµÄÈ·¶¨...')
+disp('æœ€ä½³éšå«å±‚èŠ‚ç‚¹çš„ç¡®å®š...')
  
-%¸ù¾İhiddennum=sqrt(m+n)+a£¬mÎªÊäÈë²ã½ÚµãÊı£¬nÎªÊä³ö²ã½ÚµãÊı£¬aÈ¡Öµ[1,10]Ö®¼äµÄÕûÊı
-MSE=1e+5;                             %Îó²î³õÊ¼»¯
-transform_func={'tansig','purelin'};  %¼¤»îº¯Êı²ÉÓÃtan-sigmoidºÍpurelin
-train_func='trainlm';                 %ÑµÁ·Ëã·¨£¬²ÉÓÃÓÅ»¯Ëã·¨£¬ÓÃÓÚÑ°ÕÒÎó²î×îĞ¡
+%æ ¹æ®hiddennum=sqrt(m+n)+aï¼Œmä¸ºè¾“å…¥å±‚èŠ‚ç‚¹æ•°ï¼Œnä¸ºè¾“å‡ºå±‚èŠ‚ç‚¹æ•°ï¼Œaå–å€¼[1,10]ä¹‹é—´çš„æ•´æ•°
+MSE=1e+5;                             %è¯¯å·®åˆå§‹åŒ–
+transform_func={'tansig','purelin'};  %æ¿€æ´»å‡½æ•°é‡‡ç”¨tan-sigmoidå’Œpurelin
+train_func='trainlm';                 %è®­ç»ƒç®—æ³•ï¼Œé‡‡ç”¨ä¼˜åŒ–ç®—æ³•ï¼Œç”¨äºå¯»æ‰¾è¯¯å·®æœ€å°
 for hiddennum=fix(sqrt(inputnum+outputnum))+1:fix(sqrt(inputnum+outputnum))+10
     
-    net=newff(inputn,outputn,hiddennum,transform_func,train_func); %¹¹½¨BPÍøÂç
+    net=newff(inputn,outputn,hiddennum,transform_func,train_func); %æ„å»ºBPç½‘ç»œ
     
-    % ÉèÖÃÍøÂç²ÎÊı
-    net.trainParam.epochs=1000;       % ÉèÖÃÑµÁ·´ÎÊı
-    net.trainParam.lr=0.00001;           % ÉèÖÃÑ§Ï°ËÙÂÊ
-    %net.trainParam.goal=1e-6;     % ÉèÖÃÑµÁ·Ä¿±ê×îĞ¡Îó²î
-    net.trainParam.max_fail=60;      % ×îĞ¡È·ÈÏÊ§°Ü´ÎÊı 
+    % è®¾ç½®ç½‘ç»œå‚æ•°
+    net.trainParam.epochs=1000;       % è®¾ç½®è®­ç»ƒæ¬¡æ•°
+    net.trainParam.lr=0.001;           % è®¾ç½®å­¦ä¹ é€Ÿç‡
+    net.trainParam.goal=1e-6;     % è®¾ç½®è®­ç»ƒç›®æ ‡æœ€å°è¯¯å·®
+    net.trainParam.max_fail=60;      % æœ€å°ç¡®è®¤å¤±è´¥æ¬¡æ•° 
     
-    % ½øĞĞÍøÂçÑµÁ·
+    % è¿›è¡Œç½‘ç»œè®­ç»ƒ
     net=train(net,inputn,outputn);
-    an0=sim(net,inputn);     %·ÂÕæ½á¹û
-    mse0=mse(outputn,an0);   %·ÂÕæµÄ¾ù·½Îó²î
-    disp(['µ±Òşº¬²ã½ÚµãÊıÎª',num2str(hiddennum),'Ê±£¬ÑµÁ·¼¯¾ù·½Îó²îÎª£º',num2str(mse0)])
+    an0=sim(net,inputn);     %ä»¿çœŸç»“æœ
+    mse0=mse(outputn,an0);   %ä»¿çœŸçš„å‡æ–¹è¯¯å·®
+    disp(['å½“éšå«å±‚èŠ‚ç‚¹æ•°ä¸º',num2str(hiddennum),'æ—¶ï¼Œè®­ç»ƒé›†å‡æ–¹è¯¯å·®ä¸ºï¼š',num2str(mse0)])
     
-    %²»¶Ï¸üĞÂ×î¼ÑÒşº¬²ã½Úµã
+    %ä¸æ–­æ›´æ–°æœ€ä½³éšå«å±‚èŠ‚ç‚¹
     if mse0<MSE
         MSE=mse0;
         hiddennum_best=hiddennum;
     end
 end
-disp(['×î¼ÑÒşº¬²ã½ÚµãÊıÎª£º',num2str(hiddennum_best),'£¬¾ù·½Îó²îÎª£º',num2str(MSE)])
-%% 6.¹¹½¨×î¼ÑÒşº¬²ãµÄBPÉñ¾­ÍøÂç
+disp(['æœ€ä½³éšå«å±‚èŠ‚ç‚¹æ•°ä¸ºï¼š',num2str(hiddennum_best),'ï¼Œå‡æ–¹è¯¯å·®ä¸ºï¼š',num2str(MSE)])
+%% 6.æ„å»ºæœ€ä½³éšå«å±‚çš„BPç¥ç»ç½‘ç»œ
 net=newff(inputn,outputn,hiddennum_best,transform_func,train_func);
 
-% ÍøÂç²ÎÊı
-net.trainParam.epochs=1000;         % ÑµÁ·´ÎÊı
-net.trainParam.lr=0.00001;             % Ñ§Ï°ËÙÂÊ
-%net.trainParam.goal=1e-6;       % ÑµÁ·Ä¿±ê×îĞ¡Îó²î
+% ç½‘ç»œå‚æ•°
+net.trainParam.epochs=1000;         % è®­ç»ƒæ¬¡æ•°
+net.trainParam.lr=0.001;             % å­¦ä¹ é€Ÿç‡
+net.trainParam.goal=1e-6;       % è®­ç»ƒç›®æ ‡æœ€å°è¯¯å·®
 net.trainParam.max_fail=60;
-%% 7.ÍøÂçÑµÁ·
-net=train(net,inputn,outputn);      % trainº¯ÊıÓÃÓÚÑµÁ·Éñ¾­ÍøÂç£¬µ÷ÓÃÀ¶É«·ÂÕæ½çÃæ
-%% 8.ÍøÂç²âÊÔ
-an=sim(net,inputn_test);                     % ÑµÁ·Íê³ÉµÄÄ£ĞÍ½øĞĞ·ÂÕæ²âÊÔ
-test_simu=mapminmax('reverse',an,outputps);  % ²âÊÔ½á¹û·´¹éÒ»»¯
-error=test_simu-output_test;                 % ²âÊÔÖµºÍÕæÊµÖµµÄÎó²î
+%% 7.ç½‘ç»œè®­ç»ƒ
+net=train(net,inputn,outputn);      % trainå‡½æ•°ç”¨äºè®­ç»ƒç¥ç»ç½‘ç»œï¼Œè°ƒç”¨è“è‰²ä»¿çœŸç•Œé¢
+%% 8.ç½‘ç»œæµ‹è¯•
+an=sim(net,inputn_test);                     % è®­ç»ƒå®Œæˆçš„æ¨¡å‹è¿›è¡Œä»¿çœŸæµ‹è¯•
+test_simu=mapminmax('reverse',an,outputps);  % æµ‹è¯•ç»“æœåå½’ä¸€åŒ–
+error=test_simu-output_test;                 % æµ‹è¯•å€¼å’ŒçœŸå®å€¼çš„è¯¯å·®
 
-% È¨ÖµãĞÖµ
-W1 = net.iw{1, 1};  %ÊäÈë²ãµ½ÖĞ¼ä²ãµÄÈ¨Öµ
-B1 = net.b{1};      %ÖĞ¼ä¸÷²ãÉñ¾­ÔªãĞÖµ
-W2 = net.lw{2,1};   %ÖĞ¼ä²ãµ½Êä³ö²ãµÄÈ¨Öµ
-B2 = net.b{2};      %Êä³ö²ã¸÷Éñ¾­ÔªãĞÖµ
-%% 9.½á¹ûÊä³ö
-% BPÔ¤²âÖµºÍÊµ¼ÊÖµµÄ¶Ô±ÈÍ¼
+% æƒå€¼é˜ˆå€¼
+W1 = net.iw{1, 1};  %è¾“å…¥å±‚åˆ°ä¸­é—´å±‚çš„æƒå€¼
+B1 = net.b{1};      %ä¸­é—´å„å±‚ç¥ç»å…ƒé˜ˆå€¼
+W2 = net.lw{2,1};   %ä¸­é—´å±‚åˆ°è¾“å‡ºå±‚çš„æƒå€¼
+B2 = net.b{2};      %è¾“å‡ºå±‚å„ç¥ç»å…ƒé˜ˆå€¼
+%% 9.ç»“æœè¾“å‡º
+% BPé¢„æµ‹å€¼å’Œå®é™…å€¼çš„å¯¹æ¯”å›¾
 figure
 plot(output_test,'bo-','linewidth',1.5)
 hold on
 plot(test_simu,'rs-','linewidth',1.5)
-legend('Êµ¼ÊÖµ','Ô¤²âÖµ')
-xlabel('²âÊÔÑù±¾'),ylabel('Ö¸±êÖµ')
-title('BPÔ¤²âÖµºÍÊµ¼ÊÖµµÄ¶Ô±È')
+legend('å®é™…å€¼','é¢„æµ‹å€¼')
+xlabel('æµ‹è¯•æ ·æœ¬'),ylabel('æŒ‡æ ‡å€¼')
+title('BPé¢„æµ‹å€¼å’Œå®é™…å€¼çš„å¯¹æ¯”')
 set(gca,'fontsize',12)
 
-% BP²âÊÔ¼¯µÄÔ¤²âÎó²îÍ¼
+% BPæµ‹è¯•é›†çš„é¢„æµ‹è¯¯å·®å›¾
 figure
 plot(error,'bo-','linewidth',1.5)
-xlabel('²âÊÔÑù±¾'),ylabel('Ô¤²âÎó²î')
-title('BPÉñ¾­ÍøÂç²âÊÔ¼¯µÄÔ¤²âÎó²î')
+xlabel('æµ‹è¯•æ ·æœ¬'),ylabel('é¢„æµ‹è¯¯å·®')
+title('BPç¥ç»ç½‘ç»œæµ‹è¯•é›†çš„é¢„æµ‹è¯¯å·®')
 set(gca,'fontsize',12)
 
-%¼ÆËã¸÷ÏîÎó²î²ÎÊı
-[~,len]=size(output_test);            % len»ñÈ¡²âÊÔÑù±¾¸öÊı£¬ÊıÖµµÈÓÚtestNum£¬ÓÃÓÚÇó¸÷Ö¸±êÆ½¾ùÖµ
-SSE1=sum(error.^2);                   % Îó²îÆ½·½ºÍ
-MAE1=sum(abs(error))/len;             % Æ½¾ù¾ø¶ÔÎó²î
-MSE1=error*error'/len;                % ¾ù·½Îó²î
-RMSE1=MSE1^(1/2);                     % ¾ù·½¸ùÎó²î
-MAPE1=mean(abs(error./output_test));  % Æ½¾ù°Ù·Ö±ÈÎó²î
-r=corrcoef(output_test,test_simu);    % corrcoef¼ÆËãÏà¹ØÏµÊı¾ØÕó£¬°üÀ¨×ÔÏà¹ØºÍ»¥Ïà¹ØÏµÊı
+%è®¡ç®—å„é¡¹è¯¯å·®å‚æ•°
+[~,len]=size(output_test);            % lenè·å–æµ‹è¯•æ ·æœ¬ä¸ªæ•°ï¼Œæ•°å€¼ç­‰äºtestNumï¼Œç”¨äºæ±‚å„æŒ‡æ ‡å¹³å‡å€¼
+SSE1=sum(error.^2);                   % è¯¯å·®å¹³æ–¹å’Œ
+MAE1=sum(abs(error))/len;             % å¹³å‡ç»å¯¹è¯¯å·®
+MSE1=error*error'/len;                % å‡æ–¹è¯¯å·®
+RMSE1=MSE1^(1/2);                     % å‡æ–¹æ ¹è¯¯å·®
+MAPE1=mean(abs(error./output_test));  % å¹³å‡ç™¾åˆ†æ¯”è¯¯å·®
+r=corrcoef(output_test,test_simu);    % corrcoefè®¡ç®—ç›¸å…³ç³»æ•°çŸ©é˜µï¼ŒåŒ…æ‹¬è‡ªç›¸å…³å’Œäº’ç›¸å…³ç³»æ•°
 R1=r(1,2);    
 
-% ÏÔÊ¾¸÷Ö¸±ê½á¹û
+% æ˜¾ç¤ºå„æŒ‡æ ‡ç»“æœ
 disp(' ')
-disp('¸÷ÏîÎó²îÖ¸±ê½á¹û£º')
-disp(['Îó²îÆ½·½ºÍSSE£º',num2str(SSE1)])
-disp(['Æ½¾ù¾ø¶ÔÎó²îMAE£º',num2str(MAE1)])
-disp(['¾ù·½Îó²îMSE£º',num2str(MSE1)])
-disp(['¾ù·½¸ùÎó²îRMSE£º',num2str(RMSE1)])
-disp(['Æ½¾ù°Ù·Ö±ÈÎó²îMAPE£º',num2str(MAPE1*100),'%'])
-disp(['Ô¤²â×¼È·ÂÊÎª£º',num2str(100-MAPE1*100),'%'])
-disp(['Ïà¹ØÏµÊıR£º ',num2str(R1)])
+disp('å„é¡¹è¯¯å·®æŒ‡æ ‡ç»“æœï¼š')
+disp(['è¯¯å·®å¹³æ–¹å’ŒSSEï¼š',num2str(SSE1)])
+disp(['å¹³å‡ç»å¯¹è¯¯å·®MAEï¼š',num2str(MAE1)])
+disp(['å‡æ–¹è¯¯å·®MSEï¼š',num2str(MSE1)])
+disp(['å‡æ–¹æ ¹è¯¯å·®RMSEï¼š',num2str(RMSE1)])
+disp(['å¹³å‡ç™¾åˆ†æ¯”è¯¯å·®MAPEï¼š',num2str(MAPE1*100),'%'])
+disp(['é¢„æµ‹å‡†ç¡®ç‡ä¸ºï¼š',num2str(100-MAPE1*100),'%'])
+disp(['ç›¸å…³ç³»æ•°Rï¼š ',num2str(R1)])
 
-%ÏÔÊ¾²âÊÔ¼¯½á¹û
+%æ˜¾ç¤ºæµ‹è¯•é›†ç»“æœ
 disp(' ')
-disp('²âÊÔ¼¯½á¹û£º')
-disp('    ±àºÅ     Êµ¼ÊÖµ     BPÔ¤²âÖµ     Îó²î')
+disp('æµ‹è¯•é›†ç»“æœï¼š')
+disp('    ç¼–å·     å®é™…å€¼     BPé¢„æµ‹å€¼     è¯¯å·®')
 for i=1:len
-    disp([i,output_test(i),test_simu(i),error(i)])   % ÏÔÊ¾Ë³Ğò: Ñù±¾±àºÅ£¬Êµ¼ÊÖµ£¬Ô¤²âÖµ£¬Îó²î
+    disp([i,output_test(i),test_simu(i),error(i)])   % æ˜¾ç¤ºé¡ºåº: æ ·æœ¬ç¼–å·ï¼Œå®é™…å€¼ï¼Œé¢„æµ‹å€¼ï¼Œè¯¯å·®
 end
-%% Ä£ĞÍ´æ´¢Ö¸Áî
+%% æ¨¡å‹å­˜å‚¨æŒ‡ä»¤
 save('Netmodel.mat', 'net');
-disp('ÑµÁ·ºÃµÄÉñ¾­ÍøÂçÄ£ĞÍÒÑ±£´æÎª trained_model.mat ÎÄ¼ş¡£')
+disp('è®­ç»ƒå¥½çš„ç¥ç»ç½‘ç»œæ¨¡å‹å·²ä¿å­˜ä¸º trained_model.mat æ–‡ä»¶ã€‚')
